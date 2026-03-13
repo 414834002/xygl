@@ -1,0 +1,2285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园综合管理系统 - 首页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 800px; /* 设置容器最大宽度以适应移动端 */
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+        }
+
+        .login-form {
+            flex: 1;
+        }
+
+        .qr-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border-left: 1px solid #eee;
+        }
+
+        .qr-code {
+            width: 180px;
+            height: 180px;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-placeholder {
+            width: 160px;
+            height: 160px;
+            background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
+                        linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
+                        linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .qr-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .qr-description {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-subtitle {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: white;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .main-content {
+            display: none;
+        }
+
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .switch-panel {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .switch-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .search-filter {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .message.warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-col {
+            flex: 1;
+        }
+
+        .announcement-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .announcement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .announcement-title {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .announcement-publisher {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .announcement-content {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .announcement-time {
+            color: #999;
+            font-size: 12px;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- 登录表单 -->
+    <div id="loginPage" class="login-container">
+        <div class="form-card">
+            <div class="login-form">
+                <h2 class="form-title">校园综合管理系统V4.0</h2>
+                <p class="form-subtitle">教学+校园一体化</p>
+
+                <div class="form-group">
+                    <label class="form-label">用户身份：</label>
+                    <select id="identitySelect" class="form-select">
+                        <option value="">请选择</option>
+                        <option value="管理员">管理员</option>
+                        <option value="老师">老师</option>
+                        <option value="学生">学生</option>
+                        <option value="家长">家长</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">登录账号：</label>
+                    <input type="text" id="accountInput" class="form-input" placeholder="请输入登录账号">
+                </div>
+
+                <div class="form-group" id="gradeGroup" style="display: none;">
+                    <label class="form-label">所在年级：</label>
+                    <select id="gradeSelect" class="form-select">
+                        <option value="">请选择</option>
+                        <option value="初一">初一</option>
+                        <option value="初二">初二</option>
+                        <option value="初三">初三</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">登录密码：</label>
+                    <input type="password" id="passwordInput" class="form-input" placeholder="请输入登录密码">
+                </div>
+
+                <div class="btn-group">
+                    <button onclick="login()" class="btn btn-primary">登 录</button>
+                    <button onclick="showRetrievePassword()" class="btn btn-secondary">找回密码</button>
+                    <button onclick="showRegister()" class="btn btn-secondary">用户注册</button>
+                </div>
+            </div>
+
+            <div class="qr-section">
+                <div class="qr-title">手机扫码登录</div>
+                <div class="qr-code">
+                        <img src="C:\Users\admin\Desktop\qrcode (1).png" alt="二维码" width="150" height="150">
+                </div>
+                <div class="qr-description">
+                    <p>下载校园APP</p>
+                    <p>扫描二维码登录</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 注册表单 -->
+    <div id="registerPage" class="login-container" style="display: none;">
+        <div class="form-card">
+            <div class="login-form">
+                <h2 class="form-title">用户注册</h2>
+
+                <div class="form-group">
+                    <label class="form-label">注册身份：</label>
+                    <select id="regIdentitySelect" class="form-select" onchange="updateRegFields()">
+                        <option value="">请选择</option>
+                        <option value="学生">学生</option>
+                        <option value="家长">家长</option>
+                        <option value="老师">老师</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">真实姓名：</label>
+                    <input type="text" id="regNameInput" class="form-input" placeholder="请输入真实姓名">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">登录密码：</label>
+                    <input type="password" id="regPasswordInput" class="form-input" placeholder="请输入密码">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">确认密码：</label>
+                    <input type="password" id="regConfirmPasswordInput" class="form-input" placeholder="再次输入密码">
+                </div>
+
+                <div id="dynamicRegFields"></div>
+
+                <div class="btn-group">
+                    <button onclick="submitRegistration()" class="btn btn-primary">提交注册</button>
+                    <button onclick="showLogin()" class="btn btn-secondary">返回登录</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div id="mainContent" class="container">
+        <div class="header">
+            <div id="welcomeMessage"></div>
+        </div>
+
+        <div class="nav-bar">
+            <div id="navButtons" class="nav-buttons"></div>
+            <button onclick="logout()" class="btn btn-danger">退出登录</button>
+        </div>
+
+        <div id="contentArea"></div>
+    </div>
+
+    <script>
+        // 全局变量
+        let currentUser = null;
+        let currentIdentity = null;
+        let teacherSubIdentity = "";
+        let currentExam = "";
+        let currentClass = "";
+        let user_data = {};
+        let score_data = {};
+        let security_data = {};
+        let anno_data = {};
+
+        // 初始化默认数据
+        function initDefaultData() {
+            // 用户数据
+            user_data = {
+                "sys_admin": {
+                    "password": "admin8888",
+                    "identity": "管理员",
+                    "name": "系统管理员"
+                },
+                "数学老师_张三": {
+                    "password": "math123",
+                    "identity": "老师",
+                    "sub_identity": "科任老师",
+                    "subjects": ["数学", "物理"],
+                    "teach_classes": ["初一(1)班", "初一(2)班"],
+                    "title": "数学一级教师",
+                    "admin_job": "数学教研组长"
+                },
+                "班主任_初一(1)班": {
+                    "password": "class123",
+                    "identity": "老师",
+                    "sub_identity": "班主任",
+                    "manage_class": "初一(1)班",
+                    "subjects": ["数学"],
+                    "teach_classes": ["初一(1)班", "初一(2)班"],
+                    "title": "数学高级教师",
+                    "admin_job": "初一年级组长"
+                },
+                "S001_张三_初一": {
+                    "password": "zhangsan123",
+                    "identity": "学生",
+                    "student_id": "S001",
+                    "name": "张三",
+                    "grade": "初一",
+                    "class": "初一(1)班",
+                    "gender": "男",
+                    "birth": "2008-01-01",
+                    "subjects": ["语文", "数学", "英语", "生物"],
+                    "class_job": "班长",
+                    "subject_job": "数学课代表",
+                    "student_union": "学生会主席"
+                },
+                "李四_张三": {
+                    "password": "parent123",
+                    "identity": "家长",
+                    "name": "李四",
+                    "bind_students": ["S001"]
+                }
+            };
+
+            // 成绩数据
+            score_data = {
+                "exam_config": {
+                    "current_exam": "2025-2026学年期中考试",
+                    "exams": {
+                        "2025-2026学年前期考": {"create_time": "2025-10-01"},
+                        "2025-2026学年期中考试": {"create_time": "2025-11-01"},
+                        "2025-2026学年期末考试": {"create_time": "2026-01-01"}
+                    }
+                },
+                "subject_config": {
+                    "语文": 150, "数学": 150, "英语": 150,
+                    "生物": 100, "地理": 100, "历史": 100,
+                    "化学": 100, "物理": 100, "政治": 100
+                },
+                "class_config": {
+                    "初一(1)班": {"grade": "初一", "create_time": "2025-09-01"},
+                    "初一(2)班": {"grade": "初一", "create_time": "2025-09-01"},
+                    "初二(2)班": {"grade": "初二", "create_time": "2025-09-01"}
+                },
+                "score_data": {
+                    "2025-2026学年期中考试": {
+                        "初一(1)班": [
+                            {"student_id": "S001", "name": "张三", "语文": 85, "数学": 92, "英语": 78, "生物": 88,
+                             "地理": 80, "历史": 85, "政治": 82, "总成绩": 590, "status": "正常"},
+                            {"student_id": "S002", "name": "李四", "语文": 90, "数学": 88, "英语": 95, "生物": 92,
+                             "地理": 85, "历史": 88, "政治": 87, "总成绩": 625, "status": "正常"}
+                        ]
+                    }
+                }
+            };
+
+            // 密保数据
+            security_data = {
+                "sys_admin": {"question": "管理员初始密码？", "answer": "admin"},
+                "数学老师_张三": {"question": "某老师的妻子是：", "answer": "李四"},
+                "S001_张三_初一": {"question": "某学生的宠物是：", "answer": "小猫"}
+            };
+
+            // 公告数据
+            anno_data = {
+                "announcements": [
+                    {
+                        "id": 1,
+                        "title": "2025-2026学年期中考试安排",
+                        "content": "11月1日-11月3日将举行期中考试，请各班级做好复习准备",
+                        "publisher": "教务处",
+                        "publish_time": "2025-10-25 08:00:00",
+                        "is_top": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "图书馆新馆开放通知",
+                        "content": "10月30日图书馆新馆正式开馆，开放时间8:00-22:00",
+                        "publisher": "图书馆",
+                        "publish_time": "2025-10-28 14:00:00",
+                        "is_top": false
+                    }
+                ],
+                "max_id": 2
+            };
+
+            currentExam = score_data.exam_config.current_exam;
+        }
+
+        // 初始化数据
+        initDefaultData();
+
+        // 身份选择变化事件
+        document.getElementById('identitySelect').addEventListener('change', function() {
+            if (this.value === '学生') {
+                document.getElementById('gradeGroup').style.display = 'block';
+            } else {
+                document.getElementById('gradeGroup').style.display = 'none';
+            }
+        });
+
+        // 登录函数
+        function login() {
+            const identity = document.getElementById('identitySelect').value;
+            const account = document.getElementById('accountInput').value.trim();
+            const password = document.getElementById('passwordInput').value.trim();
+            const grade = document.getElementById('gradeSelect').value;
+
+            if (!account || !password) {
+                showMessage('error', '账号和密码不能为空！');
+                return;
+            }
+
+            // 验证账号是否存在
+            if (user_data[account] && user_data[account].password === password && user_data[account].identity === identity) {
+                currentUser = account;
+                currentIdentity = identity;
+
+                // 获取用户信息
+                const userInfo = user_data[account];
+
+                // 如果是老师获取详细信息
+                if (identity === '老师') {
+                    teacherSubIdentity = userInfo.sub_identity || '科任老师';
+                    currentClass = userInfo.manage_class || (userInfo.teach_classes && userInfo.teach_classes[0]) || '';
+                } else if (identity === '学生') {
+                    currentClass = userInfo.class || '';
+                } else if (identity === '家长') {
+                    // 家长绑定学生
+                }
+
+                // 显示主界面
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+
+                // 更新欢迎信息
+                document.getElementById('welcomeMessage').innerHTML = `
+                    <h2>${userInfo.name} - ${identity}后台</h2>
+                    <p>欢迎使用校园综合管理系统</p>
+                `;
+
+                // 显示对应的数据界面
+                showMainInterface();
+
+                showMessage('success', `欢迎${userInfo.name}登录系统！`);
+            } else {
+                showMessage('error', '账号、密码或身份不匹配！');
+            }
+        }
+
+        // 显示主界面
+        function showMainInterface() {
+            const navButtons = document.getElementById('navButtons');
+            const contentArea = document.getElementById('contentArea');
+
+            // 清空内容区域
+            contentArea.innerHTML = '';
+
+            // 根据身份显示不同的导航按钮
+            navButtons.innerHTML = '';
+
+            if (currentIdentity === '管理员') {
+                navButtons.innerHTML = `
+                    <button onclick="showAdminScoreManage()" class="btn btn-primary">成绩管理</button>
+                    <button onclick="showUserManagement()" class="btn btn-primary">用户管理</button>
+                    <button onclick="showAnnouncement(true)" class="btn btn-primary">校园公告</button>
+                    <button onclick="showBackupRestore()" class="btn btn-primary">数据备份</button>
+                `;
+                showAdminScoreManage(); // 默认显示成绩管理
+            } else if (currentIdentity === '老师') {
+                if (teacherSubIdentity === '班主任') {
+                    navButtons.innerHTML = `
+                        <button onclick="showTeacherHeadScoreManage()" class="btn btn-primary">班级成绩管理</button>
+                        <button onclick="showAnnouncement(false)" class="btn btn-primary">校园公告</button>
+                        <button onclick="showChangePassword()" class="btn btn-primary">修改密码</button>
+                    `;
+                    showTeacherHeadScoreManage(); // 默认显示班主任成绩管理
+                } else {
+                    navButtons.innerHTML = `
+                        <button onclick="showTeacherViewScore()" class="btn btn-primary">成绩查看</button>
+                        <button onclick="showTeacherInputScore()" class="btn btn-primary">成绩录入</button>
+                        <button onclick="showAnnouncement(false)" class="btn btn-primary">校园公告</button>
+                        <button onclick="showChangePassword()" class="btn btn-primary">修改密码</button>
+                    `;
+                    showTeacherViewScore(); // 默认显示科任老师成绩查看
+                }
+            } else if (currentIdentity === '学生') {
+                navButtons.innerHTML = `
+                    <button onclick="showStudentScore()" class="btn btn-primary">查看个人成绩</button>
+                    <button onclick="showAnnouncement(false)" class="btn btn-primary">校园公告</button>
+                    <button onclick="showChangePassword()" class="btn btn-primary">修改密码</button>
+                `;
+                showStudentScore(); // 默认显示学生成绩
+            } else if (currentIdentity === '家长') {
+                navButtons.innerHTML = `
+                    <button onclick="showParentScore()" class="btn btn-primary">查看学生成绩</button>
+                    <button onclick="showAnnouncement(false)" class="btn btn-primary">校园公告</button>
+                    <button onclick="showChangePassword()" class="btn btn-primary">修改密码</button>
+                `;
+                showParentScore(); // 默认显示家长成绩
+            }
+        }
+
+        // 显示成绩表
+        function showScoreTable() {
+            const contentArea = document.getElementById('contentArea');
+
+            // 构建考试和班级选项
+            let examOptions = '';
+            for (let exam in score_data.exam_config.exams) {
+                examOptions += `<option value="${exam}" ${exam === currentExam ? 'selected' : ''}>${exam}</option>`;
+            }
+
+            let classOptions = '';
+            if (currentIdentity === '管理员') {
+                for (let cls in score_data.class_config) {
+                    classOptions += `<option value="${cls}" ${cls === currentClass ? 'selected' : ''}>${cls}</option>`;
+                }
+            } else if (currentIdentity === '老师') {
+                const userInfo = user_data[currentUser];
+                const classes = userInfo.teach_classes || [];
+                for (let cls of classes) {
+                    classOptions += `<option value="${cls}" ${cls === currentClass ? 'selected' : ''}>${cls}</option>`;
+                }
+            } else {
+                classOptions += `<option value="${currentClass}" selected>${currentClass}</option>`;
+            }
+
+            contentArea.innerHTML = `
+                <div class="switch-panel">
+                    <div class="switch-item">
+                        <label>选择学期：</label>
+                        <select id="examSelect" class="form-select" onchange="onExamChange()">
+                            ${examOptions}
+                        </select>
+                    </div>
+                    <div class="switch-item">
+                        <label>选择班级：</label>
+                        <select id="classSelect" class="form-select" onchange="onClassChange()">
+                            ${classOptions}
+                        </select>
+                    </div>
+                    <button onclick="refreshData()" class="btn btn-secondary">刷新数据</button>
+                </div>
+
+                <div class="table-container">
+                    <table id="scoreTable">
+                        <thead id="scoreTableHeader"></thead>
+                        <tbody id="scoreTableBody"></tbody>
+                    </table>
+                </div>
+            `;
+
+            renderScoreTable();
+        }
+
+        // 渲染成绩表
+        function renderScoreTable() {
+            const tbody = document.getElementById('scoreTableBody');
+            const thead = document.getElementById('scoreTableHeader');
+
+            if (!currentExam || !currentClass) {
+                tbody.innerHTML = '<tr><td colspan="10">请先选择学期和班级！</td></tr>';
+                return;
+            }
+
+            const classScores = score_data.score_data[currentExam]?.[currentClass] || [];
+
+            if (!classScores.length) {
+                tbody.innerHTML = `<tr><td colspan="10">在${currentExam}的${currentClass}中没有成绩数据！</td></tr>`;
+                return;
+            }
+
+            // 确定表头
+            let headers = Object.keys(classScores[0]);
+            if (currentIdentity === '老师' && teacherSubIdentity === '科任老师') {
+                const userInfo = user_data[currentUser];
+                const teacherSubjects = userInfo.subjects || [];
+                headers = ['student_id', 'name', ...teacherSubjects, '总成绩', 'status'];
+            }
+
+            // 渲染表头
+            thead.innerHTML = '<tr>' + headers.map(h => `<th>${h}</th>`).join('') + '</tr>';
+
+            // 渲染表体
+            tbody.innerHTML = classScores.map(student => {
+                return '<tr>' + headers.map(h => `<td>${student[h] || '-'}</td>`).join('') + '</tr>';
+            }).join('');
+        }
+
+        // 学期切换事件
+        function onExamChange() {
+            currentExam = document.getElementById('examSelect').value;
+            score_data.exam_config.current_exam = currentExam;
+            renderScoreTable();
+        }
+
+        // 班级切换事件
+        function onClassChange() {
+            currentClass = document.getElementById('classSelect').value;
+            renderScoreTable();
+        }
+
+        // 刷新数据
+        function refreshData() {
+            renderScoreTable();
+            showMessage('success', '数据已刷新！');
+        }
+
+        // 管理员成绩管理
+        function showAdminScoreManage() {
+            showScoreTable();
+        }
+
+        // 老师查看成绩
+        function showTeacherViewScore() {
+            showScoreTable();
+        }
+
+        // 老师录入成绩
+        function showTeacherInputScore() {
+            const contentArea = document.getElementById('contentArea');
+
+            contentArea.innerHTML = `
+                <h3>成绩录入</h3>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <label class="form-label">选择学期：</label>
+                        <select id="inputExamSelect" class="form-select">
+                            ${Object.keys(score_data.exam_config.exams).map(exam => 
+                                `<option value="${exam}">${exam}</option>`
+                            ).join('')}
+                        </select>
+                    </div>
+                    <div class="form-col">
+                        <label class="form-label">班级：</label>
+                        <select id="inputClassSelect" class="form-select">
+                            ${(user_data[currentUser].teach_classes || []).map(cls => 
+                                `<option value="${cls}">${cls}</option>`
+                            ).join('')}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <label class="form-label">学号：</label>
+                        <input type="text" id="inputStudentId" class="form-input" placeholder="请输入学号">
+                    </div>
+                    <div class="form-col">
+                        <label class="form-label">姓名：</label>
+                        <input type="text" id="inputStudentName" class="form-input" placeholder="请输入姓名">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <label class="form-label">科目：</label>
+                        <select id="inputSubjectSelect" class="form-select">
+                            ${(user_data[currentUser].subjects || []).map(sub => 
+                                `<option value="${sub}">${sub}</option>`
+                            ).join('')}
+                        </select>
+                    </div>
+                    <div class="form-col">
+                        <label class="form-label">成绩：</label>
+                        <input type="number" id="inputScore" class="form-input" placeholder="请输入成绩">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <label class="form-label">考试状态：</label>
+                        <select id="inputStatusSelect" class="form-select">
+                            <option value="正常">正常</option>
+                            <option value="缺考">缺考</option>
+                            <option value="作弊">作弊</option>
+                            <option value="缓考">缓考</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button onclick="submitInputScore()" class="btn btn-primary">提交成绩</button>
+                    <button onclick="showTeacherViewScore()" class="btn btn-secondary">返回查看</button>
+                </div>
+            `;
+        }
+
+        // 提交录入成绩
+        function submitInputScore() {
+            const exam = document.getElementById('inputExamSelect').value;
+            const cls = document.getElementById('inputClassSelect').value;
+            const sid = document.getElementById('inputStudentId').value.trim();
+            const name = document.getElementById('inputStudentName').value.trim();
+            const subject = document.getElementById('inputSubjectSelect').value;
+            const score = parseInt(document.getElementById('inputScore').value);
+            const status = document.getElementById('inputStatusSelect').value;
+
+            if (!exam || !cls || !sid || !name || !subject || isNaN(score)) {
+                showMessage('error', '所有字段都必须填写完整！');
+                return;
+            }
+
+            // 验证成绩范围
+            const fullMark = score_data.subject_config[subject] || 100;
+            if (score < 0 || score > fullMark) {
+                showMessage('error', `成绩必须在0-${fullMark}之间！`);
+                return;
+            }
+
+            // 初始化考试-班级数据
+            if (!score_data.score_data[exam]) {
+                score_data.score_data[exam] = {};
+            }
+            if (!score_data.score_data[exam][cls]) {
+                score_data.score_data[exam][cls] = [];
+            }
+
+            // 查找学生是否已存在
+            let studentExists = false;
+            for (let i = 0; i < score_data.score_data[exam][cls].length; i++) {
+                if (score_data.score_data[exam][cls][i].student_id === sid) {
+                    score_data.score_data[exam][cls][i][subject] = score;
+                    score_data.score_data[exam][cls][i].status = status;
+                    studentExists = true;
+
+                    // 计算总分
+                    calculateTotal(score_data.score_data[exam][cls][i]);
+                    break;
+                }
+            }
+
+            // 如果学生不存在，新增记录
+            if (!studentExists) {
+                const newStudent = {
+                    student_id: sid,
+                    name: name,
+                    status: status
+                };
+
+                // 初始化所有科目
+                for (let sub in score_data.subject_config) {
+                    newStudent[sub] = 0;
+                }
+
+                newStudent[subject] = score;
+                calculateTotal(newStudent);
+
+                score_data.score_data[exam][cls].push(newStudent);
+            }
+
+            showMessage('success', '成绩录入成功！');
+            showTeacherViewScore();
+        }
+
+        // 计算总分
+        function calculateTotal(student) {
+            let total = 0;
+            for (let key in student) {
+                if (['student_id', 'name', '总成绩', 'status'].includes(key)) continue;
+                if (typeof student[key] === 'number') {
+                    total += student[key];
+                }
+            }
+            student['总成绩'] = total;
+        }
+
+        // 班主任成绩管理
+        function showTeacherHeadScoreManage() {
+            showScoreTable();
+        }
+
+        // 学生查看成绩
+        function showStudentScore() {
+            const contentArea = document.getElementById('contentArea');
+            const studentInfo = user_data[currentUser];
+
+            contentArea.innerHTML = `
+                <h3>${studentInfo.name} - 个人成绩查询</h3>
+
+                <div class="form-group">
+                    <label class="form-label">选择考试：</label>
+                    <select id="studentExamSelect" class="form-select" onchange="renderStudentScoreDetail()">
+                        ${Object.keys(score_data.exam_config.exams).map(exam => 
+                            `<option value="${exam}">${exam}</option>`
+                        ).join('')}
+                    </select>
+                </div>
+
+                <div class="table-container">
+                    <table id="studentScoreTable">
+                        <thead id="studentScoreTableHeader"></thead>
+                        <tbody id="studentScoreTableBody"></tbody>
+                    </table>
+                </div>
+            `;
+
+            renderStudentScoreDetail();
+        }
+
+        // 渲染学生个人成绩详情
+        function renderStudentScoreDetail() {
+            const exam = document.getElementById('studentExamSelect').value;
+            const studentId = user_data[currentUser].student_id;
+            const className = user_data[currentUser].class;
+
+            const classScores = score_data.score_data[exam]?.[className] || [];
+            let studentScore = null;
+
+            for (let score of classScores) {
+                if (score.student_id === studentId) {
+                    studentScore = score;
+                    break;
+                }
+            }
+
+            const tbody = document.getElementById('studentScoreTableBody');
+            const thead = document.getElementById('studentScoreTableHeader');
+
+            if (!studentScore) {
+                tbody.innerHTML = '<tr><td colspan="4">暂无该次考试成绩数据！</td></tr>';
+                thead.innerHTML = '<tr><th>科目</th><th>成绩</th><th>满分</th><th>得分率</th></tr>';
+                return;
+            }
+
+            // 渲染表头
+            thead.innerHTML = '<tr><th>科目</th><th>成绩</th><th>满分</th><th>得分率</th></tr>';
+
+            // 渲染成绩详情
+            let rows = '';
+            let totalScore = 0;
+            let totalFull = 0;
+
+            for (let subject in studentScore) {
+                if (['student_id', 'name', '总成绩', 'status'].includes(subject)) continue;
+
+                const score = studentScore[subject];
+                const fullMark = score_data.subject_config[subject] || 100;
+                const rate = fullMark > 0 ? ((score / fullMark) * 100).toFixed(1) + '%' : '0.0%';
+
+                rows += `<tr><td>${subject}</td><td>${score}</td><td>${fullMark}</td><td>${rate}</td></tr>`;
+
+                if (typeof score === 'number') {
+                    totalScore += score;
+                    totalFull += fullMark;
+                }
+            }
+
+            // 添加总分行
+            const totalRate = totalFull > 0 ? ((totalScore / totalFull) * 100).toFixed(1) + '%' : '0.0%';
+            rows += `<tr><td><strong>总成绩</strong></td><td><strong>${totalScore}</strong></td><td><strong>${totalFull}</strong></td><td><strong>${totalRate}</strong></td></tr>`;
+
+            tbody.innerHTML = rows;
+        }
+
+        // 家长查看成绩
+        function showParentScore() {
+            const contentArea = document.getElementById('contentArea');
+            const parentInfo = user_data[currentUser];
+            const bindStudents = parentInfo.bind_students || [];
+
+            contentArea.innerHTML = `
+                <h3>家长 - 查看绑定学生成绩</h3>
+
+                <div class="form-group">
+                    <label class="form-label">选择学生：</label>
+                    <select id="parentStudentSelect" class="form-select">
+                        ${bindStudents.map(sid => {
+                            // 通过学号ID查找学生姓名
+                            let studentName = sid;
+                            for (let acc in user_data) {
+                                if (user_data[acc].identity === '学生' && user_data[acc].student_id === sid) {
+                                    studentName = user_data[acc].name;
+                                    break;
+                                }
+                            }
+                            return `<option value="${sid}">${studentName} (${sid})</option>`;
+                        }).join('')}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">选择考试：</label>
+                    <select id="parentExamSelect" class="form-select" onchange="renderParentScoreDetail()">
+                        ${Object.keys(score_data.exam_config.exams).map(exam => 
+                            `<option value="${exam}">${exam}</option>`
+                        ).join('')}
+                    </select>
+                </div>
+
+                <div class="table-container">
+                    <table id="parentScoreTable">
+                        <thead id="parentScoreTableHeader"></thead>
+                        <tbody id="parentScoreTableBody"></tbody>
+                    </table>
+                </div>
+            `;
+
+            renderParentScoreDetail();
+        }
+
+        // 渲染家长查看绑定学生成绩详情
+        function renderParentScoreDetail() {
+            const studentId = document.getElementById('parentStudentSelect').value;
+            const exam = document.getElementById('parentExamSelect').value;
+
+            // 通过学号ID查找班级
+            let className = '';
+            for (let acc in user_data) {
+                if (user_data[acc].identity === '学生' && user_data[acc].student_id === studentId) {
+                    className = user_data[acc].class;
+                    break;
+                }
+            }
+
+            const classScores = score_data.score_data[exam]?.[className] || [];
+            let studentScore = null;
+
+            for (let score of classScores) {
+                if (score.student_id === studentId) {
+                    studentScore = score;
+                    break;
+                }
+            }
+
+            const tbody = document.getElementById('parentScoreTableBody');
+            const thead = document.getElementById('parentScoreTableHeader');
+
+            if (!studentScore) {
+                tbody.innerHTML = '<tr><td colspan="4">该学生的成绩数据不存在！</td></tr>';
+                thead.innerHTML = '<tr><th>科目</th><th>成绩</th><th>满分</th><th>得分率</th></tr>';
+                return;
+            }
+
+            // 渲染表头
+            thead.innerHTML = '<tr><th>科目</th><th>成绩</th><th>满分</th><th>得分率</th></tr>';
+
+            // 渲染成绩详情
+            let rows = '';
+            let totalScore = 0;
+            let totalFull = 0;
+
+            for (let subject in studentScore) {
+                if (['student_id', 'name', '总成绩', 'status'].includes(subject)) continue;
+
+                const score = studentScore[subject];
+                const fullMark = score_data.subject_config[subject] || 100;
+                const rate = fullMark > 0 ? ((score / fullMark) * 100).toFixed(1) + '%' : '0.0%';
+
+                rows += `<tr><td>${subject}</td><td>${score}</td><td>${fullMark}</td><td>${rate}</td></tr>`;
+
+                if (typeof score === 'number') {
+                    totalScore += score;
+                    totalFull += fullMark;
+                }
+            }
+
+            // 添加总分行
+            const totalRate = totalFull > 0 ? ((totalScore / totalFull) * 100).toFixed(1) + '%' : '0.0%';
+            rows += `<tr><td><strong>总成绩</strong></td><td><strong>${totalScore}</strong></td><td><strong>${totalFull}</strong></td><td><strong>${totalRate}</strong></td></tr>`;
+
+            tbody.innerHTML = rows;
+        }
+
+        // 显示校园公告
+        function showAnnouncement(canPublish) {
+            const contentArea = document.getElementById('contentArea');
+
+            let publishBtn = '';
+            if (canPublish) {
+                publishBtn = '<button onclick="showPublishAnnouncement()" class="btn btn-primary">发布新公告</button>';
+            }
+
+            contentArea.innerHTML = `
+                <div class="nav-bar">
+                    <h3>校园公告列表</h3>
+                    <div>
+                        ${publishBtn}
+                        <button onclick="showMainInterface()" class="btn btn-secondary">返回主界面</button>
+                    </div>
+                </div>
+
+                <div id="announcementsList"></div>
+            `;
+
+            renderAnnouncements(canPublish);
+        }
+
+        // 渲染公告列表
+        function renderAnnouncements(canPublish) {
+            const container = document.getElementById('announcementsList');
+            const announcements = [...anno_data.announcements]; // 复制数组
+
+            // 按置顶时间排序
+            announcements.sort((a, b) => {
+                if (a.is_top && !b.is_top) return -1;
+                if (!a.is_top && b.is_top) return 1;
+                return new Date(b.publish_time) - new Date(a.publish_time);
+            });
+
+            container.innerHTML = announcements.map(anno => {
+                let actions = '';
+                if (canPublish) {
+                    actions = `
+                        <button onclick="toggleAnnouncementTop(${anno.id})" class="btn btn-secondary">
+                            ${anno.is_top ? '取消置顶' : '置顶'}
+                        </button>
+                        <button onclick="editAnnouncement(${anno.id})" class="btn btn-secondary">修改</button>
+                        <button onclick="deleteAnnouncement(${anno.id})" class="btn btn-danger">删除</button>
+                    `;
+                }
+
+                return `
+                    <div class="announcement-item">
+                        <div class="announcement-header">
+                            <div>
+                                <div class="announcement-title">${anno.title}</div>
+                                <div class="announcement-publisher">发布者：${anno.publisher}</div>
+                            </div>
+                            <div>
+                                ${actions}
+                            </div>
+                        </div>
+                        <div class="announcement-content">${anno.content}</div>
+                        <div class="announcement-time">${anno.publish_time} | ${anno.is_top ? '置顶' : '普通'}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // 发布新公告
+        function showPublishAnnouncement() {
+            const contentArea = document.getElementById('contentArea');
+
+            contentArea.innerHTML = `
+                <h3>发布校园公告</h3>
+
+                <div class="form-group">
+                    <label class="form-label">公告标题：</label>
+                    <input type="text" id="publishTitle" class="form-input" placeholder="请输入公告标题">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">发布者：</label>
+                    <input type="text" id="publishPublisher" class="form-input" placeholder="请输入发布者姓名">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">公告内容：</label>
+                    <textarea id="publishContent" class="form-input" rows="6" placeholder="请输入公告内容"></textarea>
+                </div>
+
+                <div class="btn-group">
+                    <button onclick="doPublishAnnouncement()" class="btn btn-primary">发布</button>
+                    <button onclick="showAnnouncement(true)" class="btn btn-secondary">返回</button>
+                </div>
+            `;
+        }
+
+        // 执行发布公告
+        function doPublishAnnouncement() {
+            const title = document.getElementById('publishTitle').value.trim();
+            const publisher = document.getElementById('publishPublisher').value.trim();
+            const content = document.getElementById('publishContent').value.trim();
+
+            if (!title || !publisher || !content) {
+                showMessage('error', '标题、发布者、内容均不能为空！');
+                return;
+            }
+
+            const maxId = anno_data.max_id + 1;
+            const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+            const newAnno = {
+                id: maxId,
+                title: title,
+                content: content,
+                publisher: publisher,
+                publish_time: now,
+                is_top: false
+            };
+
+            anno_data.announcements.push(newAnno);
+            anno_data.max_id = maxId;
+
+            showMessage('success', '公告发布成功！');
+            showAnnouncement(true);
+        }
+
+        // 置顶/取消置顶公告
+        function toggleAnnouncementTop(id) {
+            for (let anno of anno_data.announcements) {
+                if (anno.id === id) {
+                    anno.is_top = !anno.is_top;
+                    showMessage('success', `公告${anno.is_top ? '置顶' : '取消置顶'}成功！`);
+                    showAnnouncement(true);
+                    return;
+                }
+            }
+        }
+
+        // 修改公告
+        function editAnnouncement(id) {
+            const announcement = anno_data.announcements.find(a => a.id === id);
+            if (!announcement) {
+                showMessage('error', '公告不存在！');
+                return;
+            }
+
+            const contentArea = document.getElementById('contentArea');
+
+            contentArea.innerHTML = `
+                <h3>修改公告</h3>
+
+                <div class="form-group">
+                    <label class="form-label">公告标题：</label>
+                    <input type="text" id="editTitle" class="form-input" value="${announcement.title}">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">发布者：</label>
+                    <input type="text" id="editPublisher" class="form-input" value="${announcement.publisher}">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">公告内容：</label>
+                    <textarea id="editContent" class="form-input" rows="6">${announcement.content}</textarea>
+                </div>
+
+                <div class="btn-group">
+                    <button onclick="doEditAnnouncement(${id})" class="btn btn-primary">修改</button>
+                    <button onclick="showAnnouncement(true)" class="btn btn-secondary">返回</button>
+                </div>
+            `;
+        }
+
+        // 执行修改公告
+        function doEditAnnouncement(id) {
+            const title = document.getElementById('editTitle').value.trim();
+            const publisher = document.getElementById('editPublisher').value.trim();
+            const content = document.getElementById('editContent').value.trim();
+
+            if (!title || !publisher || !content) {
+                showMessage('error', '标题、发布者、内容均不能为空！');
+                return;
+            }
+
+            for (let anno of anno_data.announcements) {
+                if (anno.id === id) {
+                    anno.title = title;
+                    anno.publisher = publisher;
+                    anno.content = content;
+                    anno.publish_time = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+                    showMessage('success', '公告修改成功！');
+                    showAnnouncement(true);
+                    return;
+                }
+            }
+        }
+
+        // 删除公告
+        function deleteAnnouncement(id) {
+            if (!confirm('确定要删除这个公告吗？此操作不可恢复！')) {
+                return;
+            }
+
+            anno_data.announcements = anno_data.announcements.filter(a => a.id !== id);
+            showMessage('success', '公告删除成功！');
+            showAnnouncement(true);
+        }
+
+        // 显示修改密码面板
+        function showChangePassword() {
+            const contentArea = document.getElementById('contentArea');
+
+            contentArea.innerHTML = `
+                <h3>修改密码</h3>
+
+                <div class="form-group">
+                    <label class="form-label">原密码：</label>
+                    <input type="password" id="oldPassword" class="form-input" placeholder="请输入原密码">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">新密码：</label>
+                    <input type="password" id="newPassword" class="form-input" placeholder="请输入新密码（6-16位数字+字母组合）">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">确认新密码：</label>
+                    <input type="password" id="confirmNewPassword" class="form-input" placeholder="再次输入新密码">
+                </div>
+
+                <div class="btn-group">
+                    <button onclick="doChangePassword()" class="btn btn-primary">修改密码</button>
+                    <button onclick="showMainInterface()" class="btn btn-secondary">返回</button>
+                </div>
+            `;
+        }
+
+        // 执行修改密码
+        function doChangePassword() {
+            const oldPwd = document.getElementById('oldPassword').value.trim();
+            const newPwd = document.getElementById('newPassword').value.trim();
+            const confirmNewPwd = document.getElementById('confirmNewPassword').value.trim();
+
+            if (user_data[currentUser].password !== oldPwd) {
+                showMessage('error', '原密码错误！');
+                return;
+            }
+
+            if (newPwd !== confirmNewPwd) {
+                showMessage('error', '两次输入密码不一致！');
+                return;
+            }
+
+            if (newPwd.length < 6 || newPwd.length > 16) {
+                showMessage('error', '密码长度必须为6-16位！');
+                return;
+            }
+
+            if (!/[0-9]/.test(newPwd) || !/[a-zA-Z]/.test(newPwd)) {
+                showMessage('error', '密码必须包含数字和字母！');
+                return;
+            }
+
+            user_data[currentUser].password = newPwd;
+            showMessage('success', '密码修改成功！下次登录时使用新密码');
+            showMainInterface();
+        }
+
+        // 显示用户管理（仅管理员）
+        function showUserManagement() {
+            const contentArea = document.getElementById('contentArea');
+
+            contentArea.innerHTML = `
+                <div class="nav-bar">
+                    <h3>用户管理</h3>
+                    <div>
+                        <button onclick="showAddUser()" class="btn btn-primary">添加用户</button>
+                        <button onclick="showMainInterface()" class="btn btn-secondary">返回主界面</button>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>账号</th>
+                                <th>身份</th>
+                                <th>姓名</th>
+                                <th>细分类别/绑定学生</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userTableBody"></tbody>
+                    </table>
+                </div>
+            `;
+
+            renderUserTable();
+        }
+
+        // 渲染用户表
+        function renderUserTable() {
+            const tbody = document.getElementById('userTableBody');
+            tbody.innerHTML = '';
+
+            for (let account in user_data) {
+                const info = user_data[account];
+                let subInfo = '';
+
+                if (info.identity === '老师') {
+                    subInfo = info.sub_identity || '';
+                } else if (info.identity === '家长') {
+                    subInfo = info.bind_students?.join(', ') || '';
+                }
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${account}</td>
+                    <td>${info.identity}</td>
+                    <td>${info.name || ''}</td>
+                    <td>${subInfo}</td>
+                    <td>
+                        <button onclick="editUser('${account}')" class="btn btn-secondary">修改</button>
+                        <button onclick="deleteUser('${account}')" class="btn btn-danger">删除</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            }
+        }
+
+        // 显示添加用户表单
+        function showAddUser() {
+            const contentArea = document.getElementById('contentArea');
+
+            contentArea.innerHTML = `
+                <h3>添加用户</h3>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <label class="form-label">登录账号：</label>
+                        <input type="text" id="addUsername" class="form-input" placeholder="请输入登录账号">
+                    </div>
+                    <div class="form-col">
+                        <label class="form-label">登录密码：</label>
+                        <input type="password" id="addPassword" class="form-input" placeholder="请输入登录密码">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">用户类型：</label>
+                    <select id="addUserType" class="form-select">
+                        <option value="学生">学生</option>
+                        <option value="家长">家长</option>
+                        <option value="老师">老师</option>
+                        <option value="管理员">管理员</option>
+                    </select>
+                </div>
+
+                <div id="additionalUserInfo"></div>
+
+                <div class="btn-group">
+                    <button onclick="doAddUser()" class="btn btn-primary">添加</button>
+                    <button onclick="showUserManagement()" class="btn btn-secondary">返回</button>
+                </div>
+            `;
+
+            // 监听用户类型变化显示额外信息
+            document.getElementById('addUserType').addEventListener('change', updateUserAdditionalInfo);
+            updateUserAdditionalInfo();
+        }
+
+        // 更新用户额外信息
+        function updateUserAdditionalInfo() {
+            const userType = document.getElementById('addUserType').value;
+            const container = document.getElementById('additionalUserInfo');
+
+            if (userType === '老师') {
+                container.innerHTML = `
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label class="form-label">细分类别：</label>
+                            <select id="addTeacherSubIdentity" class="form-select">
+                                <option value="科任老师">科任老师</option>
+                                <option value="班主任">班主任</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label class="form-label">任教科目：（请用逗号分隔）</label>
+                            <input type="text" id="addTeacherSubjects" class="form-input" placeholder="数学,物理">
+                        </div>
+                        <div class="form-col">
+                            <label class="form-label">任课班级：（请用逗号分隔）</label>
+                            <input type="text" id="addTeacherClasses" class="form-input" placeholder="初一(1)班,初一(2)班">
+                        </div>
+                    </div>
+                `;
+            } else if (userType === '学生') {
+                container.innerHTML = `
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label class="form-label">姓名：</label>
+                            <input type="text" id="addStudentName" class="form-input" placeholder="请输入学生姓名">
+                        </div>
+                        <div class="form-col">
+                            <label class="form-label">学号：</label>
+                            <input type="text" id="addStudentId" class="form-input" placeholder="S001">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label class="form-label">年级：</label>
+                            <select id="addStudentGrade" class="form-select">
+                                <option value="初一">初一</option>
+                                <option value="初二">初二</option>
+                                <option value="初三">初三</option>
+                            </select>
+                        </div>
+                        <div class="form-col">
+                            <label class="form-label">班级：</label>
+                            <input type="text" id="addStudentClass" class="form-input" placeholder="初一(1)班">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label class="form-label">性别：</label>
+                            <select id="addStudentGender" class="form-select">
+                                <option value="男">男</option>
+                                <option value="女">女</option>
+                            </select>
+                        </div>
+                        <div class="form-col">
+                            <label class="form-label">出生日期：</label>
+                            <input type="date" id="addStudentBirth" class="form-input">
+                        </div>
+                    </div>
+                `;
+            } else if (userType === '家长') {
+                container.innerHTML = `
+                    <div class="form-group">
+                        <label class="form-label">绑定学生ID：（请用逗号分隔）</label>
+                        <input type="text" id="addParentBindStudents" class="form-input" placeholder="S001,S002">
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <div class="form-group">
+                        <label class="form-label">姓名：</label>
+                        <input type="text" id="addAdminName" class="form-input" placeholder="请输入管理员姓名">
+                    </div>
+                `;
+            }
+        }
+
+        // 执行添加用户
+        function doAddUser() {
+            const username = document.getElementById('addUsername').value.trim();
+            const password = document.getElementById('addPassword').value.trim();
+            const userType = document.getElementById('addUserType').value;
+
+            if (!username || !password) {
+                showMessage('error', '账号和密码不能为空！');
+                return;
+            }
+
+            if (user_data[username]) {
+                showMessage('error', '该账号已存在！');
+                return;
+            }
+
+            const newUser = {
+                password: password,
+                identity: userType
+            };
+
+            // 根据用户类型设置特定属性
+            if (userType === '老师') {
+                const subIdentity = document.getElementById('addTeacherSubIdentity').value;
+                const subjects = document.getElementById('addTeacherSubjects').value.split(',').map(s => s.trim()).filter(s => s);
+                const classes = document.getElementById('addTeacherClasses').value.split(',').map(c => c.trim()).filter(c => c);
+
+                newUser.sub_identity = subIdentity;
+                newUser.subjects = subjects;
+                newUser.teach_classes = classes;
+                newUser.name = username.split('_')[0]; // 从账号名中提取姓名
+            } else if (userType === '学生') {
+                const name = document.getElementById('addStudentName').value.trim();
+                const studentId = document.getElementById('addStudentId').value.trim();
+                const grade = document.getElementById('addStudentGrade').value;
+                const className = document.getElementById('addStudentClass').value.trim();
+                const gender = document.getElementById('addStudentGender').value;
+                const birth = document.getElementById('addStudentBirth').value;
+
+                newUser.name = name;
+                newUser.student_id = studentId;
+                newUser.grade = grade;
+                newUser.class = className;
+                newUser.gender = gender;
+                newUser.birth = birth;
+                newUser.subjects = [];
+            } else if (userType === '家长') {
+                const bindStudents = document.getElementById('addParentBindStudents').value.split(',').map(s => s.trim()).filter(s => s);
+                newUser.bind_students = bindStudents;
+                newUser.name = username.split('_')[0]; // 从账号名中提取姓名
+            } else {
+                const name = document.getElementById('addAdminName')?.value.trim() || '系统管理员';
+                newUser.name = name;
+            }
+
+            user_data[username] = newUser;
+            showMessage('success', '用户添加成功！');
+            showUserManagement();
+        }
+
+        // 修改用户
+        function editUser(account) {
+            const contentArea = document.getElementById('contentArea');
+            const userInfo = user_data[account];
+
+            contentArea.innerHTML = `
+                <h3>修改用户 - ${account}</h3>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <label class="form-label">登录密码：</label>
+                        <input type="password" id="editPassword" class="form-input" value="${userInfo.password}" placeholder="如需修改请输入新密码">
+                    </div>
+                    <div class="form-col">
+                        <label class="form-label">用户类型：</label>
+                        <select id="editUserType" class="form-select">
+                            <option value="学生" ${userInfo.identity === '学生' ? 'selected' : ''}>学生</option>
+                            <option value="家长" ${userInfo.identity === '家长' ? 'selected' : ''}>家长</option>
+                            <option value="老师" ${userInfo.identity === '老师' ? 'selected' : ''}>老师</option>
+                            <option value="管理员" ${userInfo.identity === '管理员' ? 'selected' : ''}>管理员</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="editAdditionalUserInfo"></div>
+
+                <div class="btn-group">
+                    <button onclick="doEditUser('${account}')" class="btn btn-primary">修改</button>
+                    <button onclick="showUserManagement()" class="btn btn-secondary">返回</button>
+                </div>
+            `;
+
+            // 渲染用户类型变化显示额外信息
+            renderEditAdditionalInfo(userInfo);
+        }
+
+        // 渲染编辑用户额外信息
+        function renderEditAdditionalInfo(userInfo) {
+            const container = document.getElementById('editAdditionalUserInfo');
+
+            if (userInfo.identity === '老师') {
+                container.innerHTML = `
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label class="form-label">细分类别：</label>
+                            <select id="editTeacherSubIdentity" class="form-select">
+                                <option value="科任老师" ${userInfo.sub_identity === '科任老师' ? 'selected' : ''}>科任老师</option>
+                                <option value="班主任" ${userInfo.sub_identity === '班主任' ? 'selected' : ''}>班主任</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label class="form-label">任教科目：（请用逗号分隔）</label>
+                            <input type="text" id="editTeacherSubjects" class="form-input" value="${userInfo.subjects?.join(',') || ''}">
+                        </div>
+                        <div class="form-col">
+                            <label class="form-label">任课班级：（请用逗号分隔）</label>
+                            <input type="text" id="editTeacherClasses" class="form-input" value="${userInfo.teach_classes?.join(',') || ''}">
+                        </div>
+                    </div>
+                `;
+            } else if (userInfo.identity === '学生') {
+                container.innerHTML = `
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label class="form-label">姓名：</label>
+                            <input type="text" id="editStudentName" class="form-input" value="${userInfo.name || ''}">
+                        </div>
+                        <div class="form-col">
+                            <label class="form-label">学号：</label>
+                            <input type="text" id="editStudentId" class="form-input" value="${userInfo.student_id || ''}">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label class="form-label">年级：</label>
+                            <select id="editStudentGrade" class="form-select">
+                                <option value="初一" ${userInfo.grade === '初一' ? 'selected' : ''}>初一</option>
+                                <option value="初二" ${userInfo.grade === '初二' ? 'selected' : ''}>初二</option>
+                                <option value="初三" ${userInfo.grade === '初三' ? 'selected' : ''}>初三</option>
+                            </select>
+                        </div>
+                        <div class="form-col">
+                            <label class="form-label">班级：</label>
+                            <input type="text" id="editStudentClass" class="form-input" value="${userInfo.class || ''}">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label class="form-label">性别：</label>
+                            <select id="editStudentGender" class="form-select">
+                                <option value="男" ${userInfo.gender === '男' ? 'selected' : ''}>男</option>
+                                <option value="女" ${userInfo.gender === '女' ? 'selected' : ''}>女</option>
+                            </select>
+                        </div>
+                        <div class="form-col">
+                            <label class="form-label">出生日期：</label>
+                            <input type="date" id="editStudentBirth" class="form-input" value="${userInfo.birth || ''}">
+                        </div>
+                    </div>
+                `;
+            } else if (userInfo.identity === '家长') {
+                container.innerHTML = `
+                    <div class="form-group">
+                        <label class="form-label">绑定学生ID：（请用逗号分隔）</label>
+                        <input type="text" id="editParentBindStudents" class="form-input" value="${userInfo.bind_students?.join(',') || ''}">
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <div class="form-group">
+                        <label class="form-label">姓名：</label>
+                        <input type="text" id="editAdminName" class="form-input" value="${userInfo.name || ''}">
+                    </div>
+                `;
+            }
+        }
+
+        // 执行修改用户
+        function doEditUser(account) {
+            const newPassword = document.getElementById('editPassword').value.trim();
+            const newUserType = document.getElementById('editUserType').value;
+
+            if (!newPassword) {
+                showMessage('error', '密码不能为空！');
+                return;
+            }
+
+            // 更新基本信息
+            user_data[account].password = newPassword;
+            user_data[account].identity = newUserType;
+
+            // 根据用户类型更新特定属性
+            if (newUserType === '老师') {
+                const subIdentity = document.getElementById('editTeacherSubIdentity').value;
+                const subjects = document.getElementById('editTeacherSubjects').value.split(',').map(s => s.trim()).filter(s => s);
+                const classes = document.getElementById('editTeacherClasses').value.split(',').map(c => c.trim()).filter(c => c);
+
+                user_data[account].sub_identity = subIdentity;
+                user_data[account].subjects = subjects;
+                user_data[account].teach_classes = classes;
+            } else if (newUserType === '学生') {
+                const name = document.getElementById('editStudentName').value.trim();
+                const studentId = document.getElementById('editStudentId').value.trim();
+                const grade = document.getElementById('editStudentGrade').value;
+                const className = document.getElementById('editStudentClass').value.trim();
+                const gender = document.getElementById('editStudentGender').value;
+                const birth = document.getElementById('editStudentBirth').value;
+
+                user_data[account].name = name;
+                user_data[account].student_id = studentId;
+                user_data[account].grade = grade;
+                user_data[account].class = className;
+                user_data[account].gender = gender;
+                user_data[account].birth = birth;
+            } else if (newUserType === '家长') {
+                const bindStudents = document.getElementById('editParentBindStudents').value.split(',').map(s => s.trim()).filter(s => s);
+                user_data[account].bind_students = bindStudents;
+            } else {
+                const name = document.getElementById('editAdminName').value.trim();
+                user_data[account].name = name;
+            }
+
+            showMessage('success', '用户信息修改成功！');
+            showUserManagement();
+        }
+
+        // 删除用户
+        function deleteUser(account) {
+            if (!confirm(`确定要删除用户 ${account} 吗？此操作不可恢复！`)) {
+                return;
+            }
+
+            delete user_data[account];
+            showMessage('success', `用户 ${account} 删除成功！`);
+            showUserManagement();
+        }
+
+        // 显示数据备份恢复面板
+        function showBackupRestore() {
+            const contentArea = document.getElementById('contentArea');
+
+            contentArea.innerHTML = `
+                <h3>数据备份恢复</h3>
+
+                <div class="form-group">
+                    <button onclick="doBackup()" class="btn btn-primary">执行数据备份</button>
+                </div>
+
+                <div class="form-group">
+                    <button onclick="showMainInterface()" class="btn btn-secondary">返回主界面</button>
+                </div>
+            `;
+        }
+
+        // 执行备份
+        function doBackup() {
+            // 在实际应用中，这里应该执行真正的备份逻辑
+            // 在网页版中，我们模拟备份功能
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+            showMessage('success', `数据备份成功！备份时间戳：${timestamp}`);
+        }
+
+        // 显示找回密码面板
+        function showRetrievePassword() {
+            const contentArea = document.getElementById('contentArea');
+
+            contentArea.innerHTML = `
+                <div class="form-card">
+                    <div class="login-form">
+                        <h2 class="form-title">找回密码</h2>
+
+                        <div class="form-group">
+                            <label class="form-label">请输入登录账号：</label>
+                            <input type="text" id="retrieveAccount" class="form-input" placeholder="请输入登录账号">
+                        </div>
+
+                        <div class="btn-group">
+                            <button onclick="doRetrievePassword()" class="btn btn-primary">下一步</button>
+                            <button onclick="showLogin()" class="btn btn-secondary">返回登录</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 执行找回密码
+        function doRetrievePassword() {
+            const account = document.getElementById('retrieveAccount').value.trim();
+
+            if (!account) {
+                showMessage('error', '请输入登录账号！');
+                return;
+            }
+
+            if (!security_data[account]) {
+                showMessage('error', '该账号未设置密保无法找回密码！');
+                return;
+            }
+
+            // 显示密保验证
+            const secInfo = security_data[account];
+            const contentArea = document.getElementById('contentArea');
+
+            contentArea.innerHTML = `
+                <div class="form-card">
+                    <div class="login-form">
+                        <h2 class="form-title">密保验证</h2>
+
+                        <div class="form-group">
+                            <p><strong>问题：</strong>${secInfo.question}</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">答案：</label>
+                            <input type="text" id="securityAnswer" class="form-input" placeholder="请输入密保答案">
+                        </div>
+
+                        <div class="btn-group">
+                            <button onclick="verifySecurityAnswer('${account}')" class="btn btn-primary">验证</button>
+                            <button onclick="showRetrievePassword()" class="btn btn-secondary">返回</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 验证密保
+        function verifySecurityAnswer(account) {
+            const answer = document.getElementById('securityAnswer').value.trim();
+            const correctAnswer = security_data[account].answer;
+
+            if (answer !== correctAnswer) {
+                showMessage('error', '密保答案错误！');
+                return;
+            }
+
+            // 显示重置密码
+            showResetPassword(account);
+        }
+
+        // 显示重置密码面板
+        function showResetPassword(account) {
+            const contentArea = document.getElementById('contentArea');
+
+            contentArea.innerHTML = `
+                <div class="form-card">
+                    <div class="login-form">
+                        <h2 class="form-title">重置密码</h2>
+
+                        <div class="form-group">
+                            <label class="form-label">新密码：</label>
+                            <input type="password" id="resetNewPassword" class="form-input" placeholder="请输入新密码（6-16位数字+字母组合）">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">确认新密码：</label>
+                            <input type="password" id="resetConfirmPassword" class="form-input" placeholder="再次输入新密码">
+                        </div>
+
+                        <div class="btn-group">
+                            <button onclick="doResetPassword('${account}')" class="btn btn-primary">重置密码</button>
+                            <button onclick="showLogin()" class="btn btn-secondary">返回登录</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 执行重置密码
+        function doResetPassword(account) {
+            const newPassword = document.getElementById('resetNewPassword').value.trim();
+            const confirmPassword = document.getElementById('resetConfirmPassword').value.trim();
+
+            if (newPassword !== confirmPassword) {
+                showMessage('error', '两次输入密码不一致！');
+                return;
+            }
+
+            if (newPassword.length < 6 || newPassword.length > 16) {
+                showMessage('error', '密码长度必须为6-16位！');
+                return;
+            }
+
+            if (!/[0-9]/.test(newPassword) || !/[a-zA-Z]/.test(newPassword)) {
+                showMessage('error', '密码必须包含数字和字母！');
+                return;
+            }
+
+            user_data[account].password = newPassword;
+            showMessage('success', '密码重置成功！请使用新密码登录！');
+            showLogin();
+        }
+
+        // 显示注册表单
+        function showRegister() {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('registerPage').style.display = 'flex';
+        }
+
+        // 显示登录表单
+        function showLogin() {
+            document.getElementById('loginPage').style.display = 'flex';
+            document.getElementById('registerPage').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'none';
+        }
+
+        // 更新注册表单字段
+        function updateRegFields() {
+            const identity = document.getElementById('regIdentitySelect').value;
+            const container = document.getElementById('dynamicRegFields');
+
+            container.innerHTML = '';
+
+            if (identity === '学生') {
+                container.innerHTML = `
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label class="form-label">所在年级：</label>
+                            <select id="regGrade" class="form-select">
+                                <option value="">请选择</option>
+                                <option value="初一">初一</option>
+                                <option value="初二">初二</option>
+                                <option value="初三">初三</option>
+                            </select>
+                        </div>
+                        <div class="form-col">
+                            <label class="form-label">所在班级：</label>
+                            <input type="text" id="regClass" class="form-input" placeholder="初一(1)班">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label class="form-label">性别：</label>
+                            <select id="regGender" class="form-select">
+                                <option value="">请选择</option>
+                                <option value="男">男</option>
+                                <option value="女">女</option>
+                            </select>
+                        </div>
+                        <div class="form-col">
+                            <label class="form-label">出生日期：</label>
+                            <input type="date" id="regBirth" class="form-input">
+                        </div>
+                    </div>
+                `;
+            } else if (identity === '家长') {
+                container.innerHTML = `
+                    <div class="form-group">
+                        <label class="form-label">绑定学生ID：（请用逗号分隔）</label>
+                        <input type="text" id="regBindStudents" class="form-input" placeholder="S001,S002">
+                    </div>
+                `;
+            } else if (identity === '老师') {
+                container.innerHTML = `
+                    <div class="form-group">
+                        <label class="form-label">老师类别：</label>
+                        <select id="regTeacherSub" class="form-select">
+                            <option value="">请选择</option>
+                            <option value="科任老师">科任老师</option>
+                            <option value="班主任">班主任</option>
+                        </select>
+                    </div>
+                    <div id="teacherSpecificFields"></div>
+                `;
+
+                // 监听老师类别变化事件
+                document.getElementById('regTeacherSub').addEventListener('change', updateTeacherSpecificFields);
+            }
+        }
+
+        // 更新老师特有字段
+        function updateTeacherSpecificFields() {
+            const subIdentity = document.getElementById('regTeacherSub').value;
+            const container = document.getElementById('teacherSpecificFields');
+
+            container.innerHTML = '';
+
+            if (subIdentity === '科任老师') {
+                container.innerHTML = `
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label class="form-label">任教科目：（请用逗号分隔）</label>
+                            <input type="text" id="regTeacherSubjects" class="form-input" placeholder="数学,物理">
+                        </div>
+                        <div class="form-col">
+                            <label class="form-label">任课班级：（请用逗号分隔）</label>
+                            <input type="text" id="regTeacherClasses" class="form-input" placeholder="初一(1)班,初一(2)班">
+                        </div>
+                    </div>
+                `;
+            } else if (subIdentity === '班主任') {
+                container.innerHTML = `
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label class="form-label">管理班级：</label>
+                            <input type="text" id="regManageClass" class="form-input" placeholder="初一(1)班">
+                        </div>
+                        <div class="form-col">
+                            <label class="form-label">任教科目：（请用逗号分隔）</label>
+                            <input type="text" id="regHeadTeacherSubjects" class="form-input" placeholder="数学">
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // 提交注册
+        function submitRegistration() {
+            const identity = document.getElementById('regIdentitySelect').value;
+            const name = document.getElementById('regNameInput').value.trim();
+            const password = document.getElementById('regPasswordInput').value.trim();
+            const confirmPassword = document.getElementById('regConfirmPasswordInput').value.trim();
+
+            if (!identity || !name || !password) {
+                showMessage('error', '所有字段都必须填写完整！');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showMessage('error', '两次输入密码不一致！');
+                return;
+            }
+
+            // 验证密码强度
+            if (password.length < 6 || password.length > 16) {
+                showMessage('error', '密码长度必须为6-16位！');
+                return;
+            }
+
+            if (!/[0-9]/.test(password) || !/[a-zA-Z]/.test(password)) {
+                showMessage('error', '密码必须包含数字和字母！');
+                return;
+            }
+
+            // 生成唯一账号
+            let account = '';
+            if (identity === '学生') {
+                const grade = document.getElementById('regGrade').value;
+                const studentClass = document.getElementById('regClass').value.trim();
+
+                // 生成学生ID（简化版）
+                let maxStudentId = 0;
+                for (let acc in user_data) {
+                    if (user_data[acc].identity === '学生') {
+                        const idMatch = acc.match(/S(\d+)/);
+                        if (idMatch) {
+                            const idNum = parseInt(idMatch[1]);
+                            if (idNum > maxStudentId) maxStudentId = idNum;
+                        }
+                    }
+                }
+                const newId = `S${String(maxStudentId + 1).padStart(3, '0')}`;
+                account = `${newId}_${name}_${grade}`;
+
+                // 创建学生用户
+                user_data[account] = {
+                    password: password,
+                    identity: identity,
+                    name: name,
+                    student_id: newId,
+                    grade: grade,
+                    class: studentClass,
+                    gender: document.getElementById('regGender').value,
+                    birth: document.getElementById('regBirth').value,
+                    subjects: [],
+                    class_job: "",
+                    subject_job: "",
+                    student_union: ""
+                };
+            } else if (identity === '家长') {
+                const bindStudents = document.getElementById('regBindStudents').value.split(',').map(s => s.trim()).filter(s => s);
+
+                // 创建家长用户
+                account = `${name}_${bindStudents.join('')}`;
+                user_data[account] = {
+                    password: password,
+                    identity: identity,
+                    name: name,
+                    bind_students: bindStudents
+                };
+            } else if (identity === '老师') {
+                const subIdentity = document.getElementById('regTeacherSub').value;
+
+                if (subIdentity === '科任老师') {
+                    const subjects = document.getElementById('regTeacherSubjects').value.split(',').map(s => s.trim()).filter(s => s);
+                    const classes = document.getElementById('regTeacherClasses').value.split(',').map(c => c.trim()).filter(c => c);
+
+                    account = `${name}_${subjects.join('')}`;
+                    user_data[account] = {
+                        password: password,
+                        identity: identity,
+                        sub_identity: subIdentity,
+                        subjects: subjects,
+                        teach_classes: classes,
+                        title: "",
+                        admin_job: "",
+                        name: name
+                    };
+                } else if (subIdentity === '班主任') {
+                    const manageClass = document.getElementById('regManageClass').value.trim();
+                    const subjects = document.getElementById('regHeadTeacherSubjects').value.split(',').map(s => s.trim()).filter(s => s);
+
+                    account = `${name}_${manageClass}`;
+                    user_data[account] = {
+                        password: password,
+                        identity: identity,
+                        sub_identity: subIdentity,
+                        manage_class: manageClass,
+                        subjects: subjects,
+                        teach_classes: [manageClass],
+                        title: "",
+                        admin_job: "",
+                        name: name
+                    };
+                } else {
+                    showMessage('error', '请选择老师类别！');
+                    return;
+                }
+            }
+
+            // 设置默认密保
+            security_data[account] = {
+                question: "您的注册验证答案是：",
+                answer: "123456"
+            };
+
+            showMessage('success', `注册成功！您的登录账号是：${account}<br>默认密保答案：123456请及时修改！`);
+            showLogin();
+        }
+
+        // 退出登录
+        function logout() {
+            if (confirm('确定要退出登录吗？')) {
+                currentUser = null;
+                currentIdentity = null;
+                teacherSubIdentity = '';
+
+                document.getElementById('loginPage').style.display = 'flex';
+                document.getElementById('mainContent').style.display = 'none';
+
+                // 重置表单
+                document.getElementById('identitySelect').value = '';
+                document.getElementById('accountInput').value = '';
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('gradeGroup').style.display = 'none';
+
+                showMessage('success', '已成功退出登录！');
+            }
+        }
+
+        // 显示消息
+        function showMessage(type, message) {
+            // 创建消息元素
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            messageDiv.innerHTML = message;
+
+            // 添加到页面顶部
+            document.querySelector('.container')?.prepend(messageDiv) || 
+            document.querySelector('.login-container')?.prepend(messageDiv);
+
+            // 3秒后自动移除
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 3000);
+        }
+
+        // 页面加载完成后的初始化
+        window.onload = function() {
+            // 可用于从本地存储加载数据，或其他初始化操作
+            console.log('校园综合管理系统加载完成');
+        };
+    </script>
+</body>
+</html>
